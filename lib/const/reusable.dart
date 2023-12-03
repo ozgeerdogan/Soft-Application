@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:my_new_project/screens/home_page.dart';
 import 'package:my_new_project/screens/wishlist_page.dart';
-import 'package:my_new_project/screens/home.dart';
 import 'package:my_new_project/screens/profile_page.dart';
 
 Image logoWidget(String imageName) {
@@ -87,7 +87,7 @@ CurvedNavigationBar navBar(context, index) {
         }
         if (index == 1) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const PinterestPage()));
+              MaterialPageRoute(builder: (context) => const HomePage()));
         }
         if (index == 2) {
           Navigator.push(context,
@@ -105,7 +105,9 @@ CurvedNavigationBar navBar(context, index) {
 }
 
 // ignore: non_constant_identifier_names
-Container profileButton(BuildContext context, String title, Function onTap, IconData IconName) {
+Container profileButton(
+    // ignore: non_constant_identifier_names
+    BuildContext context, String title, Function onTap, IconData IconName) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.9,
     height: 55,

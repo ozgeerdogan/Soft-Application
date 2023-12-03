@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/gestures.dart';
@@ -6,15 +7,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class Detay extends StatefulWidget {
-  var imgPath;
+  String imgPath;
   var linkUrl;
-  Detay({Key? key, this.imgPath, this.linkUrl}) : super(key: key);
+  void Function()? onPressedDetay;
+
+  Detay(
+      {Key? key,
+      required this.imgPath,
+      required this.linkUrl,
+      required this.onPressedDetay})
+      : super(key: key);
   @override
   // ignore: library_private_types_in_public_api
   _DetayState createState() => _DetayState();
 }
 
 class _DetayState extends State<Detay> {
+  var isLike = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,12 +84,20 @@ class _DetayState extends State<Detay> {
                     ],
                   ),
                   Container(
-                    margin: const EdgeInsets.fromLTRB(220, 0, 0, 0),
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Color(0xFF810947),
-                    ),
-                  ),
+                      margin: const EdgeInsets.fromLTRB(220, 0, 0, 0),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isLike = !isLike;
+                          });
+                        },
+                        icon: Icon(
+                          (isLike == false
+                              ? Icons.favorite_border
+                              : Icons.favorite),
+                          color: const Color(0xFF810947),
+                        ),
+                      )),
                 ],
               ),
             ))

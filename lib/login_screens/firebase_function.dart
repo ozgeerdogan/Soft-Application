@@ -2,8 +2,8 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:my_new_project/screens/home.dart';
 import 'package:my_new_project/login_screens/sign_in.dart';
+import 'package:my_new_project/screens/home_page.dart';
 
 //SIGN UP/////
 createUserWithEmailAndPassword(
@@ -58,7 +58,7 @@ signInWithEmailAndPassword(
     if (user != null) {
       // ignore: use_build_context_synchronously
       Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const PinterestPage()));
+          MaterialPageRoute(builder: (context) => const HomePage()));
     } else {}
   } on FirebaseAuthException catch (e) {
     if (e.code == 'user-not-found') {

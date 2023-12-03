@@ -2,7 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:my_new_project/login_screens/firebase_options.dart';
-import 'package:my_new_project/login_screens/sign_in.dart';
+import 'package:my_new_project/model/cart_model.dart';
+import 'package:my_new_project/screens/home_page.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +29,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        debugShowCheckedModeBanner: false, home: SignInScreen());
+    return ChangeNotifierProvider(
+        create: (context) => CartModel(),
+        child: const MaterialApp(
+            debugShowCheckedModeBanner: false, home: HomePage()));
   }
 }

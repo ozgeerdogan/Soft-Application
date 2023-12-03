@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_new_project/const/reusable.dart';
-import 'package:my_new_project/screens/home.dart';
+import 'package:my_new_project/screens/home_page.dart';
 
 class WishList extends StatelessWidget {
   const WishList({super.key});
@@ -54,10 +54,8 @@ class WishList extends StatelessWidget {
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(90)),
           child: ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PinterestPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HomePage()));
             },
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.resolveWith((states) {
