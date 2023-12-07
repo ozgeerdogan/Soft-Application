@@ -68,16 +68,15 @@ class _DetayPageState extends State<DetayPage> {
               Provider.of<CartModel>(context, listen: false).isLike =
                   !Provider.of<CartModel>(context, listen: false).isLike;
             });
-            // if (Provider.of<CartModel>(context, listen: false).isLike == true) {
-            //   Provider.of<CartModel>(context, listen: false)
-            //       .addItemToCart(widget.detayIndex);
-            // } if (Provider.of<CartModel>(context, listen: false).isLike ==
-            //     false) {
-            //   Provider.of<CartModel>(context, listen: false)
-            //       .removeItemFromCart(widget.detayIndex);
-            // }
-            Provider.of<CartModel>(context, listen: false)
-                .addItemToCart(widget.detayIndex);
+            if (Provider.of<CartModel>(context, listen: false).isLike == true) {
+              Provider.of<CartModel>(context, listen: false)
+                  .addItemToCart(widget.detayIndex);
+            }
+            if (Provider.of<CartModel>(context, listen: false).isLike ==
+                false) {
+              Provider.of<CartModel>(context, listen: false)
+                  .removeItemFromCart(widget.detayIndex);
+            }
           },
           icon: Icon(
             (Provider.of<CartModel>(context, listen: false).isLike == false
