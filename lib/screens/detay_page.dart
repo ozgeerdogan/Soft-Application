@@ -52,7 +52,7 @@ class _DetayPageState extends State<DetayPage> {
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(10))),
               child: Row(
-                children: [unFavIcon(), favIcon()],
+                children: [linkButton(), favIcon()],
               ),
             ))
       ]),
@@ -87,24 +87,7 @@ class _DetayPageState extends State<DetayPage> {
         ));
   }
 
-  Widget unFavIcon() {
-    return IconButton(
-      onPressed: () {
-        setState(() {
-          Provider.of<CartModel>(context, listen: false).isLike =
-              !Provider.of<CartModel>(context, listen: false).isLike;
-        });
-        Provider.of<CartModel>(context, listen: false)
-            .removeItemFromCart(widget.detayIndex);
-      },
-      icon: Icon(
-        (Provider.of<CartModel>(context, listen: false).isLike == false
-            ? Icons.delete
-            : Icons.delete),
-        color: const Color(0xFF810947),
-      ),
-    );
-  }
+  
 
   Widget linkButton() {
     return Row(
