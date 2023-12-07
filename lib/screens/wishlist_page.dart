@@ -1,6 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:my_new_project/const/reusable.dart';
+import 'package:my_new_project/model/cart_model.dart';
 import 'package:my_new_project/screens/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class WishList extends StatelessWidget {
   const WishList({super.key});
@@ -23,7 +28,48 @@ class WishList extends StatelessWidget {
         centerTitle: true,
         backgroundColor: const Color(0xFFFFBBFF),
       ),
-      body: Column(children: [
+      body: Consumer<CartModel>(
+        builder: (context, value, child) {
+          return value.cartItems.length != 0 ? 
+          Column(
+            children: [
+              Expanded(
+                child: MasonryGridView.builder(
+                  scrollDirection: Axis.vertical,
+                  gridDelegate:
+                      const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                  ),
+                  itemCount: value.cartItems.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 30, bottom: 7, left: 15, right: 15),
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(18.0)),
+                            child: Image.asset(value.cartItems[index][1]),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            titleLink(value, index),
+                            const Spacer(),
+                            _deleteIcon(context, index),
+                            const SizedBox(
+                              width: 10,
+                            )
+                          ],
+                        )
+                      ],
+                    );
+                  },
+                ),
+              )
+            ],
+          ) : Column(children: [
         const SizedBox(height: 100),
         const Center(
           child: SizedBox(
@@ -76,7 +122,60 @@ class WishList extends StatelessWidget {
             ),
           ),
         )
-      ]),
+      ]);
+        },
+      ),
+
+      
     );
   }
+
+  IconButton _deleteIcon(BuildContext context, int index) {
+    return IconButton(
+      onPressed: () {
+        Provider.of<CartModel>(context, listen: false)
+            .removeItemFromCart(index);
+      },
+      icon: const Icon(
+        Icons.delete,
+        color: Color(0xFF810947),
+        size: 22,
+      ),
+    );
+  }
+
+  Row titleLink(CartModel value, int index) {
+    return Row(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 20),
+          child: Icon(
+            Icons.link,
+            color: Color(0xFF810947),
+          ),
+        ),
+        Hero(
+          tag: value.cartItems[index][0],
+          child: RichText(
+              text: TextSpan(children: [
+            TextSpan(
+              text: '  TY.GL',
+              style: const TextStyle(
+                  fontFamily: "monster",
+                  color: Color(0xFF810947),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  // ignore: deprecated_member_use
+                  launch(value.cartItems[index][0]);
+                },
+            ),
+          ])),
+        ),
+      ],
+    );
+  }
+
+  
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:my_new_project/const/reusable.dart';
 import 'package:my_new_project/model/cart_model.dart';
-import 'package:my_new_project/screens/grocery_item_tile.dart';
+import 'package:my_new_project/screens/imageBox.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -34,12 +34,10 @@ class _HomePageState extends State<HomePage> {
                             ),
                             itemCount: value.shopItems.length,
                             itemBuilder: (context, index) {
-                              return GroceryItemTile(
+                              return ImageBox(
                                 linkUrl: value.shopItems[index][0],
                                 imagePath: value.shopItems[index][1],
-                                onPressed: () => Provider.of<CartModel>(context,
-                                        listen: false)
-                                    .addItemToCart(index),
+                                index: index,
                               );
                             },
                           );

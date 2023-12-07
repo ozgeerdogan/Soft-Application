@@ -1,15 +1,17 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:my_new_project/const/detay.dart';
+import 'package:my_new_project/screens/detay_page.dart';
 
 // ignore: must_be_immutable
-class GroceryItemTile extends StatelessWidget {
-  final String linkUrl;
+class ImageBox extends StatelessWidget {
+  final String? linkUrl;
   final String imagePath;
-  void Function()? onPressed;
+  final int index;
 
-  GroceryItemTile({
+  const ImageBox({
     super.key,
-    required this.onPressed,
+    required this.index,
     required this.linkUrl,
     required this.imagePath,
   });
@@ -19,10 +21,10 @@ class GroceryItemTile extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => Detay(
+            builder: (context) => DetayPage(
                   imgPath: imagePath,
                   linkUrl: linkUrl,
-                  onPressedDetay: onPressed,
+                  detayIndex: index,
                 )));
       },
       child: Padding(
